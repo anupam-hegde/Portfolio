@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Portfolio - Anupam M Hegde
 
-## Getting Started
+A modern, interactive portfolio website showcasing my expertise in AI/ML, Deep Learning, and Software Development.
 
-First, run the development server:
+## 🚀 Features
+
+- **Responsive Design** - Fully responsive across all devices
+- **Interactive Skills Section** - Animated skill cards with hover effects
+- **Project Showcase** - Featured projects with tech stack details
+- **Smooth Animations** - Powered by Framer Motion
+- **Modern UI** - Built with Next.js 16 and Tailwind CSS
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (React 19)
+- **Styling:** Tailwind CSS 4
+- **Animations:** Framer Motion
+- **Icons:** React Icons
+- **Language:** TypeScript
+
+## 💻 Getting Started
+
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To create a production build:
 
-## Learn More
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 Skills Featured
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Python
+- Machine Learning
+- Deep Learning (PyTorch)
+- Computer Vision
+- AI Agents
+- SQL
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📫 Contact
 
-## Deploy on Vercel
+- **Email:** anupam.m.hegde2004@gmail.com
+- **LinkedIn:** [linkedin.com/in/anupamhegde](https://www.linkedin.com/in/anupamhegde)
+- **GitHub:** [github.com/anupam-hegde](https://github.com/anupam-hegde)
+- **Kaggle:** [kaggle.com/anuphegde2004](https://www.kaggle.com/anuphegde2004)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2025 Anupam M Hegde. All rights reserved.
