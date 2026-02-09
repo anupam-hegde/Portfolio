@@ -1,10 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaGithub, FaKaggle, FaLinkedin, FaPython, FaBrain, FaEye, FaDatabase, FaRobot } from 'react-icons/fa';
+import { FaGithub, FaKaggle, FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
-import { SiTypescript, SiPytorch } from 'react-icons/si';
-import { useState, useEffect } from 'react';
 
 // Navbar Component
 function Navbar() {
@@ -53,62 +51,115 @@ function Navbar() {
   );
 }
 
-// Skills Section Component
-const skills = [
-  { name: 'Python', icon: <FaPython size={50} />, color: '#3776AB' },
-  { name: 'Machine Learning', icon: <FaBrain size={50} />, color: '#f7df1e' },
-  { name: 'Deep Learning', icon: <SiPytorch size={50} />, color: '#EE4C2C' },
-  { name: 'Computer Vision', icon: <FaEye size={50} />, color: '#5C8DBC' },
-  { name: 'AI Agents', icon: <FaRobot size={50} />, color: '#A445ED' },
-  { name: 'SQL', icon: <FaDatabase size={50} />, color: '#4479A1' },
+// Core Capabilities Section Component
+interface Capability {
+  title: string;
+  description: string;
+  techTags: string[];
+}
+
+const capabilities: Capability[] = [
+  {
+    title: 'Machine Learning Systems',
+    description: 'Design and implement end-to-end ML systems from data preprocessing to model deployment with focus on reliability and performance.',
+    techTags: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'MLOps']
+  },
+  {
+    title: 'Data Pipelines & Preprocessing',
+    description: 'Build robust data processing workflows that handle real-world messy data and scale efficiently across different environments.',
+    techTags: ['Python', 'Pandas', 'NumPy', 'Apache Airflow']
+  },
+  {
+    title: 'Intelligent Agent Systems',
+    description: 'Develop autonomous agents that can reason, plan, and execute complex tasks with minimal human intervention.',
+    techTags: ['LangChain', 'Multi-Agent Systems', 'RAG', 'OpenAI API']
+  },
+  {
+    title: 'Computer Vision',
+    description: 'Create vision systems that process and understand visual data for classification, detection, and analysis applications.',
+    techTags: ['OpenCV', 'YOLO', 'CNNs', 'Image Processing']
+  },
+  {
+    title: 'AI Applications & Deployment',
+    description: 'Transform research prototypes into production-ready applications with proper testing, monitoring, and scalability.',
+    techTags: ['Docker', 'FastAPI', 'Streamlit', 'AWS/GCP']
+  }
 ];
 
-function SkillsSection() {
+function CoreCapabilitiesSection() {
   return (
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+          className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
         >
-          My Skillset
+          Core Capabilities
         </motion.h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {skills.map((skill, index) => (
-            <motion.div
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-center text-gray-400 text-lg mb-16 max-w-2xl mx-auto"
+        >
+          What I can build and deliver for your organization
+        </motion.p>
+
+        {/* Responsive grid: 1 col mobile, 2 col tablet, 3 col desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {capabilities.map((capability, index) => (
+            <CapabilityCard
               key={index}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative flex flex-col items-center justify-center p-6 bg-black/50 rounded-xl border border-cyan-500/20 shadow-lg"
-            >
-              <motion.div
-                animate={{ 
-                  y: [0, -10, 0],
-                  transition: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-                }}
-                style={{ color: skill.color }}
-              >
-                {skill.icon}
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileHover={{ opacity: 1, y: 0 }}
-                className="absolute bottom-full mb-2 px-3 py-1.5 bg-gray-800 text-white text-sm rounded-md shadow-lg"
-              >
-                {skill.name}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-8 border-x-transparent border-t-8 border-t-gray-800"></div>
-              </motion.div>
-              <p className="mt-4 text-lg font-semibold text-gray-300">{skill.name}</p>
-            </motion.div>
+              capability={capability}
+              index={index}
+            />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+// Reusable Capability Card Component
+function CapabilityCard({ capability, index }: { capability: Capability; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{
+        y: -8,
+        transition: { duration: 0.2 }
+      }}
+      className="group p-6 bg-gray-900/40 border border-gray-700/50 hover:border-gray-600/60 rounded-xl transition-all duration-300 cursor-default"
+    >
+      {/* Capability Title */}
+      <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+        {capability.title}
+      </h3>
+
+      {/* Capability Description */}
+      <p className="text-gray-300 text-sm leading-relaxed mb-6 min-h-[3rem]">
+        {capability.description}
+      </p>
+
+      {/* Tech Tags */}
+      <div className="flex flex-wrap gap-2">
+        {capability.techTags.map((tag, idx) => (
+          <span
+            key={idx}
+            className="px-3 py-1 text-xs font-medium text-gray-400 bg-gray-800/60 border border-gray-700/50 rounded-full transition-colors duration-300 group-hover:text-gray-300 group-hover:border-gray-600/50"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </motion.div>
   );
 }
 
@@ -130,24 +181,47 @@ function HeroSection() {
         >
           <h2 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">Anupam
-               
+
             </span>
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparen">M Hegde</span>
           </h2>
           <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-            Transforming data into intelligence. Building systems that learn, adapt, and innovate. Passionate about creating AI solutions that matter.
+            I build end-to-end AI systems — from data pipelines and machine learning models
+            to autonomous agents and deployable applications focused on correctness and real-world use.
           </p>
-          <motion.a
-            href="https://github.com/anupam-hegde"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 212, 255, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"
-          >
-            Explore My Work
-          </motion.a>
+          <div className="flex flex-wrap gap-4">
+            <motion.a
+              href="https://github.com/anupam-hegde"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0, 212, 255, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"
+            >
+              Explore My Work
+            </motion.a>
+            <motion.a
+              href="/resume.pdf"
+              download="Anupam_Hegde_Resume.pdf"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(168, 85, 247, 0.5)' }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-8 py-3 border-2 border-purple-500 text-white font-semibold rounded-lg hover:bg-purple-500/20 transition-all shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+            >
+              Download Resume
+            </motion.a>
+          </div>
+
+          {/* Contact Info */}
+          <div className="mt-6 flex items-center gap-6 text-gray-400">
+            <a href="mailto:anupam.m.hegde2004@gmail.com" className="hover:text-cyan-400 transition-colors text-sm">
+              anupam.m.hegde2004@gmail.com
+            </a>
+            <span className="text-gray-600">•</span>
+            <a href="https://www.linkedin.com/in/anupamhegde" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors text-sm">
+              LinkedIn
+            </a>
+          </div>
         </motion.div>
 
         {/* Right Side - Profile Photo */}
@@ -159,7 +233,7 @@ function HeroSection() {
         >
           {/* Glow effect background */}
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-purple-500/30 rounded-full blur-3xl group-hover:blur-[100px] transition-all"></div>
-          
+
           {/* Profile Image Container */}
           <div className="relative w-80 h-80 group">
             <Image
@@ -201,7 +275,7 @@ function DriveSection() {
           <br className="my-4" />
           <span className="italic text-purple-300">
             I work at the intersection of models, data, and systems: fine-tuning and evaluating models, optimizing pipelines, and engineering end-to-end solutions that balance performance, interpretability, and real-world constraints.
-            </span>
+          </span>
           <br className="my-4" />
           <span className="italic text-pink-300">
             I believe the future of AI belongs to engineers who can bridge experimentation and deployment, and I’m actively developing the skills and projects to be one of them.
@@ -212,88 +286,210 @@ function DriveSection() {
   );
 }
 
-// Animated Progress Bar Component
-function SkillBar({ skill, percentage, delay, icon }: { skill: string; percentage: number; delay: number; icon: React.ReactNode }) {
-  const [isInView, setIsInView] = useState(false);
+// Enhanced Project Interface and Data
+interface Project {
+  title: string;
+  problem: string;
+  solution: string;
+  keyFeatures: string[];
+  impact: string;
+  techStack: string[];
+  githubUrl: string;
+  liveDemo?: string;
+  architecture?: string;
+  tldr: string;
+}
 
+const projects: Project[] = [
+  {
+    title: 'Quant Solver – Autonomous Aptitude Generator',
+    problem: 'Manual test creation prone to errors and requires extensive validation time',
+    solution: 'Intelligent question generation system with adversarial AI validation ensuring 100% mathematical accuracy.',
+    keyFeatures: [
+      'Multi-agent architecture with Code Executor, Logician, and Skeptic agents',
+      'Parallel processing pipeline reducing validation time by 3x',
+      'Zero-error mathematical verification through adversarial validation'
+    ],
+    impact: '3x faster question validation, eliminated human error in test creation',
+    techStack: ['Python', 'Google Gemini AI', 'Streamlit', 'Multi-Agent Systems', 'Parallel Processing', 'Agentic AI'],
+    githubUrl: 'https://github.com/anupam-hegde/Quant_Solver-',
+    tldr: 'AI system that automatically generates error-free math questions using multiple validation agents'
+  },
+  {
+    title: 'Vehicle Class Detection System',
+    problem: 'Accurate classification of Indian vehicle images across diverse vehicle types',
+    solution: 'Deep learning pipeline comparing VGG16, InceptionV3, and ResNet50 with CUDA-accelerated training.',
+    keyFeatures: [
+      'Comparative analysis framework for multiple CNN architectures',
+      'CUDA-optimized training pipeline for faster model iteration',
+      'Production-ready model comparison and selection system'
+    ],
+    impact: 'Achieved optimal model selection with comprehensive performance metrics',
+    techStack: ['TensorFlow', 'PyTorch', 'CUDA', 'Python', 'Computer Vision'],
+    githubUrl: 'https://github.com/anupam-hegde/Vehicle-class-detection',
+    tldr: 'Computer vision system that identifies different vehicle types from images with high accuracy'
+  },
+  {
+    title: 'Causal Uplift Marketing Engine',
+    problem: 'Optimizing marketing ROI by distinguishing "persuadable" customers from those who buy organically',
+    solution: 'End-to-end Causal Inference pipeline using Class Transformation (Lai Method) and XGBoost with custom hyperparameter tuning.',
+    keyFeatures: [
+      'Custom Qini curve visualization for robust causal model validation',
+      'Interactive Streamlit dashboard for real-time customer segmentation',
+      'Production-ready inference pipeline capable of identifying negative uplift ("Sleeping Dogs")'
+    ],
+    impact: 'Achieved 0.0818 Qini Score, identifying the top 30% of users that drive maximum incremental revenue',
+    techStack: ['Python', 'XGBoost', 'Scikit-Uplift', 'Streamlit', 'Pandas'],
+    githubUrl: 'https://github.com/anupam-hegde/uplift-marketing-ai',
+    liveDemo: 'https://your-deployed-site.com',
+    tldr: 'AI system that targets customers based on "persuadability" rather than just purchase probability to maximize campaign efficiency'
+  }
+];
+
+// Enhanced Project Card Component
+function EnhancedProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      onViewportEnter={() => setIsInView(true)}
-      transition={{ duration: 0.6, delay }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="mb-6"
+      whileHover={{
+        y: -4,
+        transition: { duration: 0.2 }
+      }}
+      className="group h-full p-4 bg-gray-900/40 border border-gray-700/50 hover:border-gray-600/60 rounded-xl transition-all duration-300 flex flex-col"
     >
-      <div className="flex justify-between mb-2">
-        <div className="flex items-center gap-2">
-          <span className="text-cyan-400 text-xl">{icon}</span>
-          <span className="text-cyan-400 font-semibold">{skill}</span>
-        </div>
-        <span className="text-purple-400 font-bold">{percentage}%</span>
-      </div>
-      <div className="h-2 bg-gray-800 rounded-full overflow-hidden border border-cyan-500/20">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${percentage}%` } : { width: 0 }}
-          transition={{ duration: 1.2, delay: delay + 0.3 }}
-          className="h-full bg-gradient-to-r from-cyan-500 to-purple-500 shadow-lg shadow-cyan-500/50"
-        />
-      </div>
-    </motion.div>
-  );
-}
+      {/* Project Title */}
+      <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 leading-tight">
+        {project.title}
+      </h3>
 
-// Projects Grid Component
-function ProjectCard({ title, description, tech, githubUrl }: { title: string; description: string; tech: string[]; githubUrl: string }) {
-  return (
-    <motion.div
-      whileHover={{ y: -8, boxShadow: '0 0 40px rgba(0, 212, 255, 0.3)' }}
-      onClick={() => window.open(githubUrl, '_blank')}
-      className="p-6 bg-gradient-to-br from-gray-900/50 to-gray-800/50 border border-cyan-500/20 hover:border-cyan-500/60 rounded-xl cursor-pointer transition-all group"
-    >
-      <h4 className="text-xl font-bold text-cyan-400 mb-2 group-hover:text-purple-400 transition-colors">
-        {title}
-      </h4>
-      <p className="text-gray-400 mb-4 text-sm leading-relaxed">{description}</p>
-      <div className="flex flex-wrap gap-2">
-        {tech.map((t, idx) => (
-          <motion.span
-            key={idx}
-            whileHover={{ scale: 1.05 }}
-            className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs rounded-full"
-          >
-            {t}
-          </motion.span>
+      {/* TL;DR */}
+      <p className="text-white font-bold text-sm mb-3 leading-tight">
+        TL;DR: {project.tldr}
+      </p>
+
+      {/* Impact - Most Prominent */}
+      <div className="mb-3 p-2 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
+        <p className="text-cyan-300 text-sm font-bold text-center">{project.impact}</p>
+      </div>
+
+      {/* Brief Summary */}
+      <p className="text-gray-300 text-xs leading-tight mb-2">
+        {project.solution}
+      </p>
+
+      {/* Key Features */}
+      <ul className="space-y-0.5 mb-2">
+        {project.keyFeatures.map((feature, idx) => (
+          <li key={idx} className="text-gray-400 text-xs leading-tight flex items-start">
+            <span className="text-cyan-400 mr-1.5 mt-0.5 text-[6px]">●</span>
+            {feature}
+          </li>
         ))}
+      </ul>
+
+      {/* Tech Stack */}
+      <div className="mb-3 mt-auto">
+        <div className="flex flex-wrap gap-1">
+          {project.techStack.map((tech, idx) => (
+            <span
+              key={idx}
+              className="px-2 py-0.5 text-xs font-medium text-gray-500 bg-gray-800/40 border border-gray-700/30 rounded-full transition-colors duration-300 group-hover:text-gray-400 group-hover:border-gray-600/40"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
       </div>
-      <div className="mt-4 text-purple-400 text-sm group-hover:text-cyan-300 transition-colors">
-        ↗ Open on GitHub
+
+      {/* Action Button */}
+      <div className="mt-auto flex gap-3">
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 block px-3 py-1.5 bg-gray-800/50 border border-gray-600/50 text-gray-300 text-xs font-medium rounded-lg hover:bg-gray-700/50 hover:border-gray-500/60 hover:text-white transition-all duration-200 text-center"
+          onClick={(e) => e.stopPropagation()}
+        >
+          View Code
+        </a>
+        {project.liveDemo && (
+          <a
+            href={project.liveDemo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 block px-3 py-1.5 bg-cyan-900/30 border border-cyan-500/30 text-cyan-300 text-xs font-medium rounded-lg hover:bg-cyan-800/40 hover:border-cyan-400/50 hover:text-cyan-200 transition-all duration-200 text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Live Demo
+          </a>
+        )}
       </div>
     </motion.div>
   );
 }
 
-// Projects Section
-function ProjectsSection() {
-  const projects = [
-    {
-      title: 'Quant Solver – Autonomous Aptitude Generator',
-      description: 'Intelligent question generation system that ensures 100% mathematical accuracy through adversarial AI validation. Three specialized agents (Code Executor, Logician, Skeptic) work in parallel to verify each question, reducing validation time by 3x while eliminating human error in test creation.',
-      tech: ['Python', 'Google Gemini AI', 'Streamlit', 'Multi-Agent Systems', 'Parallel Processing','Agentic AI'],
-      githubUrl: 'https://github.com/anupam-hegde/Quant_Solver-',
-    },
-   
-    {
-      title: 'Vehicle Class Detection',
-      description: 'Deep learning project for classifying Indian vehicle images using VGG16, InceptionV3, and ResNet50 with CUDA-accelerated training and model comparison notebooks.',
-      tech: ['TensorFlow', 'PyTorch', 'Jupyter Notebook', 'CUDA','Python'],
-      githubUrl: 'https://github.com/anupam-hegde/Vehicle-class-detection',
-    },
-   
-    
-  ];
+// Contact Section Component
+function ContactSection() {
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="py-16 px-6 bg-gray-900/20"
+    >
+      <div className="max-w-4xl mx-auto text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-3xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+        >
+          Let's Connect
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-gray-400 text-lg mb-8 max-w-xl mx-auto"
+        >
+          Ready to build something impactful together? Let's discuss your next AI project.
+        </motion.p>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="flex flex-wrap justify-center gap-4"
+        >
+          <a
+            href="mailto:anupam.m.hegde2004@gmail.com"
+            className="px-6 py-3 bg-cyan-600/20 border border-cyan-500/40 text-cyan-300 font-medium rounded-lg hover:bg-cyan-600/30 hover:border-cyan-400/60 hover:text-cyan-200 transition-all duration-200"
+          >
+            Email Me
+          </a>
+          <a
+            href="https://www.linkedin.com/in/anupamhegde"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 bg-purple-600/20 border border-purple-500/40 text-purple-300 font-medium rounded-lg hover:bg-purple-600/30 hover:border-purple-400/60 hover:text-purple-200 transition-all duration-200"
+          >
+            LinkedIn
+          </a>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+}
+
+// Enhanced Projects Section
+function ProjectsSection() {
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -303,22 +499,33 @@ function ProjectsSection() {
       className="py-20 px-6"
     >
       <div className="max-w-6xl mx-auto">
-        <h3 className="text-4xl font-bold mb-12 text-center">
-          <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-            Featured Projects
-          </span>
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.h2
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+        >
+          Featured Projects
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-center text-gray-400 text-lg mb-16 max-w-2xl mx-auto"
+        >
+          End-to-end systems that solve real problems through engineering excellence
+        </motion.p>
+
+        {/* Responsive grid: 1 column mobile, 2 desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projects.map((project, idx) => (
-            <motion.div
+            <EnhancedProjectCard
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <ProjectCard {...project} />
-            </motion.div>
+              project={project}
+              index={idx}
+            />
           ))}
         </div>
       </div>
@@ -334,11 +541,21 @@ function Footer() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="py-12 px-6 border-t border-cyan-500/20 text-center"
+      className="py-12 px-6 border-t border-gray-700/30 text-center"
     >
-      <p className="text-gray-500 mb-4">
-        
-      </p>
+      <div className="flex justify-center items-center gap-6 mb-6">
+        <a href="mailto:anupam.m.hegde2004@gmail.com" className="text-gray-400 hover:text-cyan-400 transition-colors text-sm">
+          anupam.m.hegde2004@gmail.com
+        </a>
+        <span className="text-gray-600">•</span>
+        <a href="https://www.linkedin.com/in/anupamhegde" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors text-sm">
+          LinkedIn
+        </a>
+        <span className="text-gray-600">•</span>
+        <a href="https://github.com/anupam-hegde" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors text-sm">
+          GitHub
+        </a>
+      </div>
       <p className="text-gray-600 text-sm">© 2025 Anupam M Hegde. All rights reserved.</p>
     </motion.footer>
   );
@@ -363,7 +580,7 @@ function GetInTouchSection() {
         <p className="text-gray-400 text-center mb-12 text-lg">
           Have a project in mind or want to collaborate? Feel free to reach out!
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Email Card */}
           <motion.a
@@ -408,8 +625,9 @@ export default function Home() {
     <div className="w-full bg-black text-white overflow-x-hidden">
       <Navbar />
       <HeroSection />
-      <SkillsSection />
+      <CoreCapabilitiesSection />
       <ProjectsSection />
+      <ContactSection />
       <Footer />
     </div>
   );
