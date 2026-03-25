@@ -1,8 +1,45 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaGithub, FaKaggle, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaKaggle, FaLinkedin, FaRobot, FaBrain, FaImage, FaCogs } from 'react-icons/fa';
+import {
+  SiPytorch, SiTensorflow, SiScikitlearn, SiPython, SiPandas, SiNumpy,
+  SiApacheairflow, SiOpenai, SiOpencv, SiDocker, SiFastapi, SiStreamlit,
+  SiAmazonwebservices, SiGooglecloud, SiLangchain, SiNvidia
+} from 'react-icons/si';
 import Image from 'next/image';
+import { type ReactNode } from 'react';
+
+// --- Tech Icon Map ---
+const techIconMap: Record<string, { icon: ReactNode; color: string }> = {
+  'PyTorch':        { icon: <SiPytorch />,          color: '#EE4C2C' },
+  'TensorFlow':     { icon: <SiTensorflow />,       color: '#FF6F00' },
+  'Scikit-learn':   { icon: <SiScikitlearn />,      color: '#F7931E' },
+  'MLOps':          { icon: <FaCogs />,             color: '#8B5CF6' },
+  'Python':         { icon: <SiPython />,           color: '#3776AB' },
+  'Pandas':         { icon: <SiPandas />,           color: '#150458' },
+  'NumPy':          { icon: <SiNumpy />,            color: '#013243' },
+  'Apache Airflow': { icon: <SiApacheairflow />,    color: '#017CEE' },
+  'LangChain':      { icon: <SiLangchain />,        color: '#1C3C3C' },
+  'Multi-Agent Systems': { icon: <FaRobot />,       color: '#06B6D4' },
+  'RAG':            { icon: <FaBrain />,            color: '#A855F7' },
+  'OpenAI API':     { icon: <SiOpenai />,           color: '#412991' },
+  'OpenCV':         { icon: <SiOpencv />,           color: '#5C3EE8' },
+  'YOLO':           { icon: <FaImage />,            color: '#00D4AA' },
+  'CNNs':           { icon: <FaBrain />,            color: '#EC4899' },
+  'Image Processing': { icon: <FaImage />,          color: '#0EA5E9' },
+  'Docker':         { icon: <SiDocker />,           color: '#2496ED' },
+  'FastAPI':        { icon: <SiFastapi />,          color: '#009688' },
+  'Streamlit':      { icon: <SiStreamlit />,        color: '#FF4B4B' },
+  'AWS/GCP':        { icon: <SiAmazonwebservices />,color: '#FF9900' },
+  'Google Gemini AI':{ icon: <SiGooglecloud />,     color: '#4285F4' },
+  'Parallel Processing': { icon: <FaCogs />,        color: '#06B6D4' },
+  'Agentic AI':     { icon: <FaRobot />,            color: '#A855F7' },
+  'CUDA':           { icon: <SiNvidia />,           color: '#76B900' },
+  'Computer Vision': { icon: <FaImage />,           color: '#0EA5E9' },
+  'XGBoost':        { icon: <FaBrain />,            color: '#FF6600' },
+  'Scikit-Uplift':  { icon: <SiScikitlearn />,      color: '#F7931E' },
+};
 
 // Navbar Component
 function Navbar() {
@@ -11,7 +48,7 @@ function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-cyan-500/20"
+      className="fixed top-0 left-0 right-0 z-50 bg-gray-950/30 backdrop-blur-sm border-b border-cyan-500/20"
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
@@ -148,16 +185,28 @@ function CapabilityCard({ capability, index }: { capability: Capability; index: 
         {capability.description}
       </p>
 
-      {/* Tech Tags */}
-      <div className="flex flex-wrap gap-2">
-        {capability.techTags.map((tag, idx) => (
-          <span
-            key={idx}
-            className="px-3 py-1 text-xs font-medium text-gray-400 bg-gray-800/60 border border-gray-700/50 rounded-full transition-colors duration-300 group-hover:text-gray-300 group-hover:border-gray-600/50"
-          >
-            {tag}
-          </span>
-        ))}
+      {/* Tech Icons */}
+      <div className="flex flex-wrap gap-3">
+        {capability.techTags.map((tag, idx) => {
+          const tech = techIconMap[tag];
+          return (
+            <div
+              key={idx}
+              className="flex flex-col items-center gap-1 group/icon transition-all duration-300"
+              title={tag}
+            >
+              <span
+                className="text-xl transition-all duration-300 drop-shadow-sm group-hover/icon:scale-125 group-hover/icon:drop-shadow-lg"
+                style={{ color: tech?.color || '#9CA3AF' }}
+              >
+                {tech?.icon || tag}
+              </span>
+              <span className="text-[9px] text-gray-500 group-hover:text-gray-400 transition-colors whitespace-nowrap">
+                {tag}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </motion.div>
   );
@@ -390,17 +439,29 @@ function EnhancedProjectCard({ project, index }: { project: Project; index: numb
         ))}
       </ul>
 
-      {/* Tech Stack */}
+      {/* Tech Stack Icons */}
       <div className="mb-3 mt-auto">
-        <div className="flex flex-wrap gap-1">
-          {project.techStack.map((tech, idx) => (
-            <span
-              key={idx}
-              className="px-2 py-0.5 text-xs font-medium text-gray-500 bg-gray-800/40 border border-gray-700/30 rounded-full transition-colors duration-300 group-hover:text-gray-400 group-hover:border-gray-600/40"
-            >
-              {tech}
-            </span>
-          ))}
+        <div className="flex flex-wrap gap-3">
+          {project.techStack.map((tech, idx) => {
+            const t = techIconMap[tech];
+            return (
+              <div
+                key={idx}
+                className="flex flex-col items-center gap-1 group/icon transition-all duration-300"
+                title={tech}
+              >
+                <span
+                  className="text-lg transition-all duration-300 drop-shadow-sm group-hover/icon:scale-125 group-hover/icon:drop-shadow-lg"
+                  style={{ color: t?.color || '#9CA3AF' }}
+                >
+                  {t?.icon || tech}
+                </span>
+                <span className="text-[8px] text-gray-500 group-hover:text-gray-400 transition-colors whitespace-nowrap">
+                  {tech}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -622,7 +683,7 @@ function GetInTouchSection() {
 // Main Home Component
 export default function Home() {
   return (
-    <div className="w-full bg-black text-white overflow-x-hidden">
+    <div className="w-full bg-transparent text-white overflow-x-hidden">
       <Navbar />
       <HeroSection />
       <CoreCapabilitiesSection />
