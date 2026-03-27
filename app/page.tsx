@@ -5,40 +5,44 @@ import { FaGithub, FaKaggle, FaLinkedin, FaRobot, FaBrain, FaImage, FaCogs } fro
 import {
   SiPytorch, SiTensorflow, SiScikitlearn, SiPython, SiPandas, SiNumpy,
   SiApacheairflow, SiOpenai, SiOpencv, SiDocker, SiFastapi, SiStreamlit,
-  SiAmazonwebservices, SiGooglecloud, SiLangchain, SiNvidia
+  SiAmazonwebservices, SiGooglecloud, SiLangchain, SiNvidia, SiReact, SiTypescript
 } from 'react-icons/si';
 import Image from 'next/image';
 import { type ReactNode } from 'react';
 
 // --- Tech Icon Map ---
 const techIconMap: Record<string, { icon: ReactNode; color: string }> = {
-  'PyTorch':        { icon: <SiPytorch />,          color: '#EE4C2C' },
-  'TensorFlow':     { icon: <SiTensorflow />,       color: '#FF6F00' },
-  'Scikit-learn':   { icon: <SiScikitlearn />,      color: '#F7931E' },
-  'MLOps':          { icon: <FaCogs />,             color: '#8B5CF6' },
-  'Python':         { icon: <SiPython />,           color: '#3776AB' },
-  'Pandas':         { icon: <SiPandas />,           color: '#150458' },
-  'NumPy':          { icon: <SiNumpy />,            color: '#013243' },
-  'Apache Airflow': { icon: <SiApacheairflow />,    color: '#017CEE' },
-  'LangChain':      { icon: <SiLangchain />,        color: '#1C3C3C' },
-  'Multi-Agent Systems': { icon: <FaRobot />,       color: '#06B6D4' },
-  'RAG':            { icon: <FaBrain />,            color: '#A855F7' },
-  'OpenAI API':     { icon: <SiOpenai />,           color: '#412991' },
-  'OpenCV':         { icon: <SiOpencv />,           color: '#5C3EE8' },
-  'YOLO':           { icon: <FaImage />,            color: '#00D4AA' },
-  'CNNs':           { icon: <FaBrain />,            color: '#EC4899' },
-  'Image Processing': { icon: <FaImage />,          color: '#0EA5E9' },
-  'Docker':         { icon: <SiDocker />,           color: '#2496ED' },
-  'FastAPI':        { icon: <SiFastapi />,          color: '#009688' },
-  'Streamlit':      { icon: <SiStreamlit />,        color: '#FF4B4B' },
-  'AWS/GCP':        { icon: <SiAmazonwebservices />,color: '#FF9900' },
-  'Google Gemini AI':{ icon: <SiGooglecloud />,     color: '#4285F4' },
-  'Parallel Processing': { icon: <FaCogs />,        color: '#06B6D4' },
-  'Agentic AI':     { icon: <FaRobot />,            color: '#A855F7' },
-  'CUDA':           { icon: <SiNvidia />,           color: '#76B900' },
-  'Computer Vision': { icon: <FaImage />,           color: '#0EA5E9' },
-  'XGBoost':        { icon: <FaBrain />,            color: '#FF6600' },
-  'Scikit-Uplift':  { icon: <SiScikitlearn />,      color: '#F7931E' },
+  'PyTorch': { icon: <SiPytorch />, color: '#EE4C2C' },
+  'TensorFlow': { icon: <SiTensorflow />, color: '#FF6F00' },
+  'Scikit-learn': { icon: <SiScikitlearn />, color: '#F7931E' },
+  'MLOps': { icon: <FaCogs />, color: '#8B5CF6' },
+  'Python': { icon: <SiPython />, color: '#3776AB' },
+  'Pandas': { icon: <SiPandas />, color: '#150458' },
+  'NumPy': { icon: <SiNumpy />, color: '#013243' },
+  'Apache Airflow': { icon: <SiApacheairflow />, color: '#017CEE' },
+  'LangChain': { icon: <SiLangchain />, color: '#1C3C3C' },
+  'Multi-Agent Systems': { icon: <FaRobot />, color: '#06B6D4' },
+  'RAG': { icon: <FaBrain />, color: '#A855F7' },
+  'OpenAI API': { icon: <SiOpenai />, color: '#412991' },
+  'OpenCV': { icon: <SiOpencv />, color: '#5C3EE8' },
+  'YOLO': { icon: <FaImage />, color: '#00D4AA' },
+  'CNNs': { icon: <FaBrain />, color: '#EC4899' },
+  'Image Processing': { icon: <FaImage />, color: '#0EA5E9' },
+  'Docker': { icon: <SiDocker />, color: '#2496ED' },
+  'FastAPI': { icon: <SiFastapi />, color: '#009688' },
+  'Streamlit': { icon: <SiStreamlit />, color: '#FF4B4B' },
+  'AWS/GCP': { icon: <SiAmazonwebservices />, color: '#FF9900' },
+  'Google Gemini AI': { icon: <SiGooglecloud />, color: '#4285F4' },
+  'Parallel Processing': { icon: <FaCogs />, color: '#06B6D4' },
+  'Agentic AI': { icon: <FaRobot />, color: '#A855F7' },
+  'CUDA': { icon: <SiNvidia />, color: '#76B900' },
+  'Computer Vision': { icon: <FaImage />, color: '#0EA5E9' },
+  'XGBoost': { icon: <FaBrain />, color: '#FF6600' },
+  'Scikit-Uplift': { icon: <SiScikitlearn />, color: '#F7931E' },
+  'LangGraph': { icon: <SiLangchain />, color: '#1C3C3C' },
+  'React 19': { icon: <SiReact />, color: '#61DAFB' },
+  'TypeScript': { icon: <SiTypescript />, color: '#3178C6' },
+  'Python 3.11': { icon: <SiPython />, color: '#3776AB' },
 };
 
 // Navbar Component
@@ -347,6 +351,7 @@ interface Project {
   liveDemo?: string;
   architecture?: string;
   tldr: string;
+  imageUrl?: string;
 }
 
 const projects: Project[] = [
@@ -362,7 +367,8 @@ const projects: Project[] = [
     impact: '3x faster question validation, eliminated human error in test creation',
     techStack: ['Python', 'Google Gemini AI', 'Streamlit', 'Multi-Agent Systems', 'Parallel Processing', 'Agentic AI'],
     githubUrl: 'https://github.com/anupam-hegde/Quant_Solver-',
-    tldr: 'AI system that automatically generates error-free math questions using multiple validation agents'
+    tldr: 'AI system that automatically generates error-free math questions using multiple validation agents',
+    imageUrl: '/quant_solver.png'
   },
   {
     title: 'Vehicle Class Detection System',
@@ -376,7 +382,8 @@ const projects: Project[] = [
     impact: 'Achieved optimal model selection with comprehensive performance metrics',
     techStack: ['TensorFlow', 'PyTorch', 'CUDA', 'Python', 'Computer Vision'],
     githubUrl: 'https://github.com/anupam-hegde/Vehicle-class-detection',
-    tldr: 'Computer vision system that identifies different vehicle types from images with high accuracy'
+    tldr: 'Computer vision system that identifies different vehicle types from images with high accuracy',
+    imageUrl: '/vehicle_detection.png'
   },
   {
     title: 'Causal Uplift Marketing Engine',
@@ -390,8 +397,41 @@ const projects: Project[] = [
     impact: 'Achieved 0.0818 Qini Score, identifying the top 30% of users that drive maximum incremental revenue',
     techStack: ['Python', 'XGBoost', 'Scikit-Uplift', 'Streamlit', 'Pandas'],
     githubUrl: 'https://github.com/anupam-hegde/uplift-marketing-ai',
-    liveDemo: 'https://your-deployed-site.com',
-    tldr: 'AI system that targets customers based on "persuadability" rather than just purchase probability to maximize campaign efficiency'
+    liveDemo: 'https://uplift-marketing-engine-3bbw2h9g9fjjb27c9qyejg.streamlit.app',
+    tldr: 'AI system that targets customers based on "persuadability" rather than just purchase probability to maximize campaign efficiency',
+    imageUrl: '/causal_uplift.png'
+  },
+  {
+    title: 'Autonomous CI/CD Healing Agent',
+    problem: 'Manual intervention required for repetitive CI/CD pipeline failures and bug patching in distributed teams.',
+    solution: 'A deterministic, multi-agent AI system using LangGraph to automatically detect, classify, and patch code failures with 100% containerized verification.',
+    keyFeatures: [
+      '8-Stage Deterministic State Machine: Orchestrated via LangGraph (Test → Classify → Plan → Apply → Commit → Wait for CI → Fetch → Verify).',
+      'Isolated Execution Sandboxing: Uses Docker containers to validate AI-generated patches locally before pushing to production, eliminating hallucinations.',
+      'Closed-Loop GitHub Integration: Automated workflow that clones repos, creates branches, triggers GitHub Actions, and opens Pull Requests for verified fixes.',
+      'Real-Time Cyber-Dashboard: Modern React 19 interface providing live telemetry of the agent’s reasoning steps, score breakdowns, and diff summaries.'
+    ],
+    impact: 'Reduces developer MTTR (Mean Time To Recovery) by automating the identification of syntax, logic, and dependency errors across Python and TypeScript.',
+    techStack: ['LangGraph', 'FastAPI', 'React 19', 'Docker', 'Google Gemini AI', 'TypeScript', 'Python 3.11'],
+    githubUrl: 'https://github.com/anupam-hegde/autonomous_ci-cd_healing_agent',
+    liveDemo: 'https://self-healing-frontend.onrender.com',
+    tldr: 'An AI DevOps agent that finds bugs in your code, fixes them in a sandbox, and opens a PR—all while you sleep.',
+    imageUrl: '/self_healing_agent.png'
+  },
+  {
+    title: 'EduRAG: AI-Powered RAG Study Companion',
+    problem: 'Students waste countless hours manually searching through hundreds of pages of unindexed PDFs and lecture notes to find specific academic answers, lacking a unified, context-aware study assistant.',
+    solution: 'Engineered a seamless Telegram-based AI bot utilizing a Retrieval-Augmented Generation (RAG) pipeline to automatically scrape, embed, and query university-specific study materials, providing instant, accurate answers grounded in the actual syllabus.',
+    keyFeatures: [
+      'Advanced RAG Architecture: Implemented an Ensemble Retriever combining BM25 (keyword search) and ChromaDB (semantic vector search via HuggingFace embeddings) for highly accurate information retrieval.',
+      'Automated Data Pipeline: Built a custom web scraper using BeautifulSoup to dynamically locate, index, and download university subject PDFs directly from educational repositories.',
+      'Telegram Native Interface: Developed a frictionless, chat-based UI using python-telegram-bot, allowing students to securely download notes and query LLMs without needing a standalone app.'
+    ],
+    impact: 'Transformed the student study workflow by reducing information retrieval time from minutes to seconds, delivering highly contextualized AI responses while completely eliminating hallucinated answers outside the curriculum.',
+    techStack: ['LangChain', 'Python', 'HuggingFace', 'ChromaDB', 'Telegram API', 'BeautifulSoup'],
+    githubUrl: 'https://github.com/anupam-hegde/edurag',
+    tldr: 'An end-to-end Telegram bot utilizing a custom RAG pipeline to dynamically scrape syllabus PDFs and answer complex student queries instantly using advanced semantic search.',
+    imageUrl: '/edurag.png'
   }
 ];
 
@@ -407,10 +447,23 @@ function EnhancedProjectCard({ project, index }: { project: Project; index: numb
         y: -4,
         transition: { duration: 0.2 }
       }}
-      className="group h-full p-4 bg-gray-900/40 border border-gray-700/50 hover:border-gray-600/60 rounded-xl transition-all duration-300 flex flex-col"
+      className="group h-full bg-gray-900/40 border border-gray-700/50 hover:border-gray-600/60 rounded-xl transition-all duration-300 flex flex-col overflow-hidden"
     >
-      {/* Project Title */}
-      <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 leading-tight">
+      {/* Project Image */}
+      {project.imageUrl && (
+        <div className="relative w-full h-48 overflow-hidden border-b border-gray-700/50 flex-shrink-0 bg-gray-950/50">
+          <Image
+            src={project.imageUrl}
+            alt={project.title}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+          />
+        </div>
+      )}
+
+      <div className="p-4 flex flex-col flex-1">
+        {/* Project Title */}
+        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300 leading-tight">
         {project.title}
       </h3>
 
@@ -487,6 +540,7 @@ function EnhancedProjectCard({ project, index }: { project: Project; index: numb
             Live Demo
           </a>
         )}
+      </div>
       </div>
     </motion.div>
   );
